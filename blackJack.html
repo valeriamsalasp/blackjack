@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <title>BlackJack</title>
+    <script src="/socket.io-client\dist/socket.io.js"></script>
+    <script>
+        var suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
+        var values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+        var deck = new Array();
+        var players = new Array();
+        var currentPlayer = 0;
+    </script>
+    <style>
+
+	    input[type=text], select {
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            box-sizing: border-box;
+	    }
+      .game
+      {
+          width: 800px;
+          height: 400px;
+          background-color: darkgreen;
+          border: solid 1px #ddd;
+          margin: 0 auto;
+          padding: 30px;
+      }
+      .card{
+          width: 70px;
+          height: 100px;
+          padding: 10px;
+          border: solid 1px #808080;
+          background-color: white;
+          display: inline-block;
+          border-radius: 10px;
+          font-size: 8pt;
+          text-align: center;
+          margin: 3px;
+      }
+      .players{
+          float:left;
+          width: 500px;
+      }
+      .player{
+          width: 40%;
+          border: solid 2px #ccc;
+          border-radius: 10px;
+          padding: 10px;
+          display: inline-block;
+          margin:1%;
+          vertical-align: top;
+      }
+      .player.active{
+          border: solid 2px #1caff6;
+      }
+      .points{
+          text-align: center;
+          font-size: 20pt;
+          font-weight: bold;
+          margin: 10px;
+      }
+      .deck{
+          float:right;
+          width: 200px;
+      }
+  </style>
+</head>
+  <body>
+    <center><div>
+        Name: <input type="text" id="user">
+        <br><br>
+         <button id = 'start'>Start game</button> 
+    </div></center>
+    <br>
+      <div id="div" ></div>
+    <script src="./js/app.js">
+    </script>
+  </body>
+  
+<div class="game">
+  <input type="button" class="btn" value="hit me" onclick="hitMe()" />
+  <input type="button" class="btn" value="stand" onclick="stand()" />
+
+  <div id="players" class="players"> </div>
+
+  <div id="deck" class="deck">
+      <div class="card" id="deckcount"><img src="back.jpg"  width="70px" height="100px"></div>
+      <div class="status" id="status"></div>
+  </div>
+
+  <div class="clear"></div>
+</div>
+
+
+</html>
