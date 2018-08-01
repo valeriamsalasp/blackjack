@@ -1,24 +1,26 @@
 var cont=0;
+//crear mazo
 function createDeck(){
-    deck = new Array();
-    for (var v = 0 ; v < values.length; v++){
-        for(var s = 0; s < suits.length; s++){
+    var deck=[];
+    for (var i = 0 ; i < values.length; i++) {
+        for(var x = 0; x < suits.length; x++) {
             var weight = parseInt(values[i]);
             if (values[i] == "J" || values[i] == "Q" || values[i] == "K")
                 weight = 10;
             if (values[i] == "A")
                 weight = 11;
-            var card = { Value: values[v], Suit: suits[s], Weight: weight };
+            var card = { Value: values[i], Suit: suits[x], Weight: weight };
             deck.push(card);
         }
     }
+    return deck;
 }
 
 function createPlayers(name){
     
     //for(var i = 1; i <= num; i++)
     //{
-        var hand = new Array();
+        var hand = [];
         var player = { Name: name, Points: 0, Hand: hand, bet:0 };
         players.push(player);
         
