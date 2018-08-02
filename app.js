@@ -17,20 +17,14 @@ function createDeck(){
 }
 
 function createPlayers(name){
-    
-    //for(var i = 1; i <= num; i++)
-    //{
-        var hand = [];
-        var player = { Name: name, Points: 0, Hand: hand, bet:0 };
-        players.push(player);
+    var hand = [];
+    var player = { Name: name, Points: 0, Hand: hand };
+    players.push(player);
         
-        return player
-        
-    //}
+    return player
 }
 
-function createPlayersUI(i, name)
-{
+function createPlayersUI(i, name){
     //document.getElementById('players').innerHTML = '';
     //for(var i = 0; i < players.length; i++)
     //{
@@ -53,12 +47,10 @@ function createPlayersUI(i, name)
     //}
 }
 
-function shuffle()
-{
+function shuffle(){
     // for 1000 turns
-    // switch the values of two random cards
-    for (var i = 0; i < 1000; i++)
-    {
+    // reapartir dos cartas al azar
+    for (var i = 0; i < 1000; i++){
         var location1 = Math.floor((Math.random() * deck.length));
         var location2 = Math.floor((Math.random() * deck.length));
         var temp = deck[location1];
@@ -68,8 +60,7 @@ function shuffle()
     }
 }
 
-function dealHands(players)
-{
+function dealHands(players){
     // entregar dos cartas a cada jugador presente
     for(var i = 0; i < 2; i++){
         for (var x = 0; x < players.length; x++){
@@ -78,7 +69,6 @@ function dealHands(players)
             updatePoints();
         }
     }
-
     updateDeck();
 }
 
@@ -91,8 +81,7 @@ function makeCard(card, player){
 // retorna los puntos de un jugador
 function getPoints(player){
     var points = 0;
-    for(var i = 0; i < players[player].Hand.length; i++)
-    {
+    for(var i = 0; i < players[player].Hand.length; i++){
         points += players[player].Hand[i].Weight;
     }
     players[player].Points = points;
@@ -114,15 +103,14 @@ function updatePoints(){
     }
 }
 
-function hitMe()
-{
+function hitMe(){
     // dar una nueva carta del mazo al jugador actual
-    // verificar si los puntos del jugador actual son mayores a 21
     var card = deck.pop();
     players[currentPlayer].Hand.push(card);
     makeCard(card, currentPlayer);
     updatePoints();
     updateDeck();
+    // verificar si los puntos del jugador actual son mayores a 21
     check();
 }
 
@@ -139,14 +127,19 @@ function stand(){
 }
 
 function endGame(){
-    var winner = -1;
+    var winner = [];
     var score = 0;
     for(var i = 0; i < players.length; i++){
         if (players[i].Points > score && players[i].Points < 22){
             winner = i;
         }
 
-        score = players[i].Points;
+        score = this.players[i].Points;
+    }
+    for (var i=0; i<this.players.length; i++){
+        if (this.players[i].Points == score){
+            winner.push(this.player[i]);
+        }
     }
     console.log(winner)
     document.getElementById('status').innerHTML = 'Winner: Player ' + players[winner].Name;
@@ -161,6 +154,48 @@ function check(){
 function updateDeck(){
     document.getElementById('deckcount').innerHTML = deck.length;
 }
+
+/*this.getCardImage = function() {
+    var suitName, CardName;
+    var sourceRoot="img/";
+
+    switch(suit) {
+        case 1:
+            suitName="hearts";
+            break;
+        case 2:
+             suitName = "diamonds";
+             break;
+        case 3:
+             suitName = "spades";
+             break;
+        case 4:
+             suitName = "clubs";
+             break;
+        default:
+            suitName = "Error";
+    }; 
+
+    switch(number) {
+        case 1:
+             cardName = "ace";
+             break;
+        case 11:
+            cardName="jack";
+            break;
+        case 12:
+             cardName = "queen";
+             break;
+        case 13:
+             cardName = "king";
+             break;
+        default:
+            cardName = number;
+    }; 
+
+    return (sourceRoot + cardName + '_of_' + suitName + '.png');
+
+}*/
 
 function start(name){
     // entrega dos cartas a cada jugador
